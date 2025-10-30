@@ -1,33 +1,65 @@
-// تایپ برای یک آیتم در لیست
 export interface Item {
-  id: string; // شناسه یکتا برای هر آیتم
-  title: string; // عنوان آیتم
-  subtitle: string; // زیرعنوان آیتم
-  createdAt: string; // زمان ایجاد آیتم (به فرمت ISO string)
+  id: string; 
+  title: string; 
+  subtitle: string; 
+  createdAt: string; 
 }
 
-// تایپ برای اطلاعات مودال (برای ویرایش یا اضافه کردن آیتم)
 export interface ModalItem {
-  title: string; // عنوان آیتم
-  subtitle: string; // زیرعنوان آیتم
+  title: string; 
+  subtitle: string;                      
 }
 
-// تایپ برای عملکردهای مختلف (پروپس‌های کامپوننت‌ها)
 export interface ItemListProps {
-  items: Item[]; // لیست آیتم‌ها
-  onEdit: (item: Item) => void; // تابعی برای ویرایش آیتم
-  onDelete: (id: string) => void; // تابعی برای حذف آیتم
+  items: Item[]; 
+  onEdit: (item: Item) => void;     
+  onDelete: (id: string) => void;   
 }
 
 export interface ModalProps {
-  isOpen: boolean; // وضعیت باز بودن مودال
-  onClose: () => void; // تابعی برای بستن مودال
-  onSubmit: (title: string, subtitle: string) => void; // تابعی برای ارسال اطلاعات
-  existingItem?: ModalItem; // اطلاعات آیتم برای ویرایش (در صورت وجود)
+  isOpen: boolean; 
+  onClose: () => void; 
+  onSubmit: (title: string, subtitle: string) => void;   
+  existingItem?: ModalItem; 
 }
 
 export interface ItemProps {
-  item: Item; // اطلاعات یک آیتم
-  onEdit: (item: Item) => void; // تابعی برای ویرایش آیتم
-  onDelete: (id: string) => void; // تابعی برای حذف آیتم
+  item: Item; 
+  onEdit: (item: Item) => void;
+  onDelete: (id: string) => void; 
+}
+
+export interface ItemType {
+  id: string;        
+  subtitle: string;  
+  createdAt: string; 
+}
+
+export interface ModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    onSubmit: (title: string, subtitle: string) => void;
+    existingItem?: { title: string; subtitle: string };
+}
+
+
+export interface ItemType {
+  id: string; // شناسه یکتا برای هر آیتم
+  title: string; // عنوان آیتم
+  subtitle: string; // زیرعنوان آیتم
+  createdAt: string; // تاریخ و زمان ایجاد آیتم به فرمت ISO string
+}
+
+
+export interface ItemListProps {
+    items: ItemType[];
+    onEdit: (item: ItemType) => void;
+    onDelete: (id: string) => void;
+}
+
+
+export interface ItemProps {
+    item: ItemType;
+    onEdit: (item: ItemType) => void;
+    onDelete: (id: string) => void;
 }

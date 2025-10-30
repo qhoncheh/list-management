@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ItemProps } from '../types/types';
 
 export interface ItemType {
     id: string;        // شناسه یکتا برای هر آیتم
@@ -7,14 +7,7 @@ export interface ItemType {
     createdAt: string; // تاریخ و زمان ایجاد آیتم به فرمت ISO string
 }
 
-
-interface ItemProps {
-    item: ItemType;
-    onEdit: (item: ItemType) => void;
-    onDelete: (id: string) => void;
-}
-
-const Item: React.FC<ItemProps> = ({ item, onEdit, onDelete }) => {
+const Item  = ({ item, onEdit, onDelete }: ItemProps) => {
     return (
         <div className="flex justify-between items-center p-4 border-b">
             <div>

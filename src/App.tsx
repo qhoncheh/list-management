@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';  // وارد کردن صحیح uuidv4
+import { v4 as uuidv4 } from 'uuid'; 
 import ItemList from './components/ItemList';
 import Modal from './components/Modal';
-
-export interface ItemType {
-  id: string;        // شناسه یکتا برای هر آیتم
-  title: string;     // عنوان آیتم
-  subtitle: string;  // زیرعنوان آیتم
-  createdAt: string; // تاریخ و زمان ایجاد آیتم به فرمت ISO string
-}
+import type { ItemType } from './components/Item';
 
 const App: React.FC = () => {
   const [items, setItems] = useState<ItemType[]>([]);
@@ -17,7 +11,7 @@ const App: React.FC = () => {
 
   const handleAddItem = (title: string, subtitle: string) => {
     const newItem: ItemType = {
-      id: uuidv4(),  // استفاده صحیح از uuidv4
+      id: uuidv4(),  
       title,
       subtitle,
       createdAt: new Date().toISOString(),
@@ -46,22 +40,25 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="p-8">
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-4 py-2 bg-green-500 text-white rounded-md mb-4"
-      >
-        Create Item
-      </button>
-      <ItemList items={items} onEdit={handleEditItem} onDelete={handleDeleteItem} />
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={editingItem ? handleUpdateItem : handleAddItem}
-        existingItem={editingItem ? { title: editingItem.title, subtitle: editingItem.subtitle } : undefined}
-      />
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="p-8 flex flex-col items-center">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="px-4 py-2 bg-green-600 text-white rounded-md mb-4 cursor-pointer"
+        >
+          Create Item
+        </button>
+        <ItemList items={items} onEdit={handleEditItem} onDelete={handleDeleteItem} />
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={editingItem ? handleUpdateItem : handleAddItem}
+          existingItem={editingItem ? { title: editingItem.title, subtitle: editingItem.subtitle } : undefined}
+        />
+      </div>
     </div>
   );
+
 };
 
 export default App;
