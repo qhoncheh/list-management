@@ -1,10 +1,10 @@
 import type { ItemProps } from '../types/types';
 
 export interface ItemType {
-    id: string;        // شناسه یکتا برای هر آیتم
-    title: string;     // عنوان آیتم
-    subtitle: string;  // زیرعنوان آیتم
-    createdAt: string; // تاریخ و زمان ایجاد آیتم به فرمت ISO string
+    id: string;    
+    title: string;     
+    subtitle: string; 
+    createdAt: string;
 }
 
 const Item  = ({ item, onEdit, onDelete }: ItemProps) => {
