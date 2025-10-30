@@ -1,73 +1,55 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+این پروژه یک رابط کاربری برای مدیریت لیست است که با React و TypeScript ساخته شده.
+کاربر می‌تواند آیتم‌ها را مشاهده، اضافه، ویرایش و حذف کند.
+طراحی رابط کاربری با استفاده از Tailwind CSS انجام شده است.
 
-Currently, two official plugins are available:
+🎯 ویژگی‌ها
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+✅ نمایش لیست (List View)
 
-## React Compiler
+نمایش تمام آیتم‌های ایجاد شده
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+هر آیتم شامل موارد زیر است:
 
-## Expanding the ESLint configuration
+عنوان (Title)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+زیرعنوان (Subtitle)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+تاریخ ایجاد (Date Created – به‌صورت خودکار)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+دکمه‌های ویرایش (Edit) و حذف (Delete)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+✅ فرم افزودن (Create Modal)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+با کلیک روی دکمه‌ی Create Item یک مودال باز می‌شود
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+شامل دو فیلد ورودی برای عنوان و زیرعنوان
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+با ثبت فرم، آیتم جدید به لیست اضافه می‌شود و زمان ایجاد به‌صورت خودکار ثبت می‌شود
+
+✅ ویرایش آیتم (Edit Functionality)
+
+با کلیک روی دکمه‌ی Edit، همان مودال باز می‌شود و اطلاعات آیتم پر می‌گردد
+
+با ثبت فرم، اطلاعات آیتم در لیست به‌روزرسانی می‌شود
+
+✅ حذف آیتم (Delete Functionality)
+
+با کلیک روی Delete آیتم مربوطه از لیست حذف می‌شود
+
+✅ ویژگی‌های اضافه (Bonus)
+
+اعتبارسنجی ساده فرم (جلوگیری از ارسال فیلدهای خالی)
+
+طراحی واکنش‌گرا (Responsive)
+
+رابط کاربری تمیز و ساده با Tailwind CSS
+
+🛠️ تکنولوژی‌های استفاده شده
+تکنولوژی	توضیح
+⚛️ React	ساخت رابط کاربری با کامپوننت‌های تابعی
+🧠 TypeScript	افزایش اطمینان کدنویسی با تایپ ایمنی
+🎨 Tailwind CSS	استایل‌دهی سریع و مدرن
+🆔 UUID	تولید شناسه یکتا برای هر آیتم
+⚡ Vite	ابزار build سریع برای React
