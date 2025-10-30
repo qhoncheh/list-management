@@ -1,13 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import type { ModalProps } from '../types/types';
 
-interface ModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (title: string, subtitle: string) => void;
-    existingItem?: { title: string; subtitle: string };
-}
-
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSubmit, existingItem }) => {
+const Modal = ({ isOpen, onClose, onSubmit, existingItem }: ModalProps) => {
     const [title, setTitle] = useState<string>(existingItem?.title || '');
     const [subtitle, setSubtitle] = useState<string>(existingItem?.subtitle || '');
 

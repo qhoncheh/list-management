@@ -1,20 +1,7 @@
-import React from 'react';
 import Item from './Item';
+import type { ItemListProps } from '../types/types';
 
-export interface ItemType {
-    id: string;        // شناسه یکتا برای هر آیتم
-    title: string;     // عنوان آیتم
-    subtitle: string;  // زیرعنوان آیتم
-    createdAt: string; // تاریخ و زمان ایجاد آیتم به فرمت ISO string
-}
-
-interface ItemListProps {
-    items: ItemType[];
-    onEdit: (item: ItemType) => void;
-    onDelete: (id: string) => void;
-}
-
-const ItemList: React.FC<ItemListProps> = ({ items, onEdit, onDelete }) => {
+const ItemList = ({ items, onEdit, onDelete }: ItemListProps) => {
     return (
         <div>
             {items.map((item) => (
