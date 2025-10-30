@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';  // وارد کردن صحیح uuidv4
+import ItemList from './components/ItemList';
+import Modal from './components/Modal';
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export interface ItemType {
+  id: string;        // شناسه یکتا برای هر آیتم
+  title: string;     // عنوان آیتم
+  subtitle: string;  // زیرعنوان آیتم
+  createdAt: string; // تاریخ و زمان ایجاد آیتم به فرمت ISO string
 }
 
-export default App
+const App: React.FC = () => {
+  const [items, setItems] = useState<ItemType[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingItem, setEditingItem] = useState<ItemType | null>(null);
+
+  const handleAddItem = (title: string, subtitle: string) => {
+    const newItem: ItemType = {
+      id: uuidv4(),  // استفاده صحیح از uuidv4
+      title,
+      subtitle,
+      createdAt: new Date().toISOString(),
+    };
+    setItems([...items, newItem]);
+  };
+
+  const handleEditItem = (item: ItemType) => {
+    setEditingItem(item);
+    setIsModalOpen(true);
+  };
+
+  const handleUpdateItem = (title: string, subtitle: string) => {
+    if (editingItem) {
+      const updatedItems = items.map((item) =>
+        item.id === editingItem.id ? { ...item, title, subtitle } : item
+      );
+      setItems(updatedItems);
+      setEditingItem(null);
+      setIsModalOpen(false);
+    }
+  };
+
+  const handleDeleteItem = (id: string) => {
+    setItems(items.filter((item) => item.id !== id));
+  };
+
+  return (
+    <div className="p-8">
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="px-4 py-2 bg-green-500 text-white rounded-md mb-4"
+      >
+        Create Item
+      </button>
+      <ItemList items={items} onEdit={handleEditItem} onDelete={handleDeleteItem} />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={editingItem ? handleUpdateItem : handleAddItem}
+        existingItem={editingItem ? { title: editingItem.title, subtitle: editingItem.subtitle } : undefined}
+      />
+    </div>
+  );
+};
+
+export default App;
